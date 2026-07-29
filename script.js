@@ -1,40 +1,76 @@
-const typing = document.getElementById("typing");
-const question = document.getElementById("question");
-const buttons = document.getElementById("buttons");
-const yes = document.getElementById("yes");
-const no = document.getElementById("no");
-
-const step2 = document.getElementById("step2");
-const finish = document.getElementById("finish");
-
-const submit = document.getElementById("submit");
-
 let noCount = 0;
 
-const text = "یه سوال مهم ازت دارم... 🥹❤️";
+let selectedDate = "";
+let selectedTime = "";
 
-let i = 0;
+const title = document.getElementById("title");
+const text = document.getElementById("text");
+const buttons = document.getElementById("buttons");
 
-function typeWriter(){
 
-if(i < text.length){
+// دکمه بعداً
+function later(){
 
-typing.innerHTML += text.charAt(i);
+    noCount++;
 
-i++;
+    if(noCount == 1){
 
-setTimeout(typeWriter,80);
+        title.innerHTML = "باشه 😊";
+        text.innerHTML = "هر وقت خواستی دوباره بازش کن";
 
-}else{
+    }
 
-setTimeout(()=>{
+    else if(noCount == 2){
 
-question.classList.remove("hide");
-buttons.classList.remove("hide");
+        title.innerHTML = "هنوز یه سوال کوچیک مونده ✨";
+        text.innerHTML = "فقط یه نگاه کوچیک";
 
-},700);
+    }
+
+    else{
+
+        startInvite();
+
+    }
 
 }
+
+
+
+// شروع دعوت
+
+function startInvite(){
+
+    title.innerHTML = "🌸 یه سوال دارم";
+
+    text.innerHTML =
+    "با من میای یه دیت کوچیک؟ 😊";
+
+
+    buttons.innerHTML = `
+
+    <button class="yes" onclick="chooseDate()">
+    آره ✨
+    </button>
+
+
+    <button class="no" onclick="later()">
+    نه
+    </button>
+
+    `;
+
+}
+
+
+
+// انتخاب تاریخ
+
+function chooseDate(){
+
+    title.innerHTML = "📅 چه روزی دوست داری؟";
+
+    text.innerHTML = "";}
 
 }
 
