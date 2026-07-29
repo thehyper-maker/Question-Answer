@@ -1,115 +1,35 @@
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:Tahoma, Arial, sans-serif;
-}
+let noCount = 0;
 
-body{
+let selectedDate = "";
+let selectedTime = "";
 
-    min-height:100vh;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    overflow:hidden;
-
-    background:linear-gradient(
-        135deg,
-        #ffb6d9,
-        #ffdff0,
-        #ffc2e2
-    );
-
-}
+const title = document.getElementById("title");
+const text = document.getElementById("text");
+const buttons = document.getElementById("buttons");
 
 
-body::before{
+// دکمه بعداً
+function later(){
 
-    content:"";
-    position:absolute;
-    width:300px;
-    height:300px;
-    background:#ffffff55;
-    border-radius:50%;
-    top:-100px;
-    right:-100px;
-    animation:move 8s infinite alternate;
+    noCount++;
 
-}
+    if(noCount == 1){
 
-
-body::after{
-
-    content:"";
-    position:absolute;
-    width:250px;
-    height:250px;
-    background:#ffffff44;
-    border-radius:50%;
-    bottom:-80px;
-    left:-80px;
-    animation:move 10s infinite alternate;
-
-}
-
-
-@keyframes move{
-
-    from{
-        transform:translateY(0);
-    }
-
-    to{
-        transform:translateY(40px);
-    }
-
-}
-
-
-
-.container{
-
-    width:90%;
-    max-width:420px;
-    z-index:2;
-
-}
-
-
-
-.card{
-
-    background:rgba(255,255,255,0.25);
-    backdrop-filter:blur(20px);
-
-    border-radius:30px;
-
-    padding:35px 25px;
-
-    text-align:center;
-
-    box-shadow:
-    0 15px 40px rgba(0,0,0,.15);
-
-    animation:show .8s ease;
-
-}
-
-
-
-@keyframes show{
-
-    from{
-
-        opacity:0;
-        transform:translateY(30px);
+        title.innerHTML = "باشه 😊";
+        text.innerHTML = "هر وقت خواستی دوباره بازش کن";
 
     }
 
-    to{
+    else if(noCount == 2){
 
-        opacity:1;
-        transform:translateY(0);
+        title.innerHTML = "هنوز یه سوال کوچیک مونده ✨";
+        text.innerHTML = "فقط یه نگاه کوچیک";
+
+    }
+
+    else{
+
+        startInvite();
 
     }
 
@@ -117,161 +37,150 @@ body::after{
 
 
 
-h1{
+// شروع دعوت
 
-    color:#fff;
-    font-size:30px;
-    margin-bottom:15px;
+function startInvite(){
 
-}
+    title.innerHTML = "🌸 یه سوال دارم";
 
-
-
-p{
-
-    color:white;
-    font-size:18px;
-    margin-bottom:25px;
-
-}
+    text.innerHTML =
+    "با من میای یه دیت کوچیک؟ 😊";
 
 
+    buttons.innerHTML = `
 
-button{
+    <button class="yes" onclick="chooseDate()">
+    آره ✨
+    </button>
 
-    width:100%;
 
-    border:none;
+    <button class="no" onclick="later()">
+    نه
+    </button>
 
-    padding:15px;
-
-    margin:10px 0;
-
-    border-radius:50px;
-
-    font-size:18px;
-
-    cursor:pointer;
-
-    transition:.3s;
+    `;
 
 }
 
 
 
-button:hover{
+// انتخاب تاریخ
 
-    transform:scale(1.05);
+function chooseDate(){
 
-}
+    title.innerHTML = "📅 چه روزی دوست داری؟";
 
-
-
-.yes{
-
-    background:#ff4f91;
-    color:white;
-
-}
+    text.innerHTML = "";
 
 
+    buttons.innerHTML = `
 
-.no{
+    <div class="dateBox">
 
-    background:white;
-    color:#ff4f91;
+    <input 
+    type="date" 
+    id="date">
 
-}
+    </div>
 
 
+    <button class="yes" onclick="chooseTime()">
+    ادامه 🌸
+    </button>
 
-.dateBox,
-.timeBox{
-
-    margin-top:20px;
+    `;
 
 }
 
 
 
-input,
-select{
+// انتخاب ساعت
 
-    width:100%;
+function chooseTime(){
 
-    padding:15px;
+    selectedDate =
+    document.getElementById("date").value;
 
-    border:none;
 
-    border-radius:20px;
+    title.innerHTML = "⏰ چه ساعتی؟";
 
-    font-size:16px;
 
-    text-align:center;
+    buttons.innerHTML = `
 
-    outline:none;
+
+    <div class="timeBox">
+
+    <input 
+    type="time" 
+    id="time">
+
+    </div>
+
+
+    <button class="yes" onclick="finish()">
+    ثبت کن ✨
+    </button>
+
+
+    `;
+
 
 }
 
 
 
-.footer{
+// پایان و ارسال تلگرام
 
-    position:fixed;
+function finish(){
 
-    bottom:15px;
+    selectedTime =
+    document.getElementById("time").value;
 
-    color:white;
 
-    font-size:13px;
 
-    z-index:3;
+    title.innerHTML = "✨ آماده شد";
 
-    opacity:.9;
+
+    text.innerHTML =
+    "نتیجه آماده است، فقط ارسالش کن 😊";
+
+
+
+    let message = 
+`🌸 یک دعوت جدید
+
+جواب: آره ✅
+
+📅 تاریخ:
+${selectedDate}
+
+⏰ ساعت:
+${selectedTime}
+
+
+Made with ❤️ by Alireza Monadi`;
+
+
+
+    let telegramLink =
+    "https://t.me/The_HyperX?text="
+    +
+    encodeURIComponent(message);
+
+
+
+    buttons.innerHTML = `
+
+
+    <a class="telegram"
+    href="${telegramLink}">
+    
+    📩 ارسال نتیجه به تلگرام
+
+    </a>
+
+
+    `;
+
 
 }
-
-
-
-.telegram{
-
-    display:block;
-
-    background:#229ED9;
-
-    color:white;
-
-    padding:15px;
-
-    border-radius:50px;
-
-    text-decoration:none;
-
-    margin-top:20px;
-
-}
-
-
-
-.fade{
-
-    animation:fade .5s;
-
-}
-
-
-@keyframes fade{
-
-    from{
-
-        opacity:0;
-
-    }
-
-    to{
-
-        opacity:1;
-
-    }
-
-        }
