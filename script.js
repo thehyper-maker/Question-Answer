@@ -1,35 +1,115 @@
-let noCount = 0;
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Tahoma, Arial, sans-serif;
+}
 
-let selectedDate = "";
-let selectedTime = "";
+body{
 
-const title = document.getElementById("title");
-const text = document.getElementById("text");
-const buttons = document.getElementById("buttons");
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    overflow:hidden;
+
+    background:linear-gradient(
+        135deg,
+        #ffb6d9,
+        #ffdff0,
+        #ffc2e2
+    );
+
+}
 
 
-// دکمه بعداً
-function later(){
+body::before{
 
-    noCount++;
+    content:"";
+    position:absolute;
+    width:300px;
+    height:300px;
+    background:#ffffff55;
+    border-radius:50%;
+    top:-100px;
+    right:-100px;
+    animation:move 8s infinite alternate;
 
-    if(noCount == 1){
+}
 
-        title.innerHTML = "باشه 😊";
-        text.innerHTML = "هر وقت خواستی دوباره بازش کن";
+
+body::after{
+
+    content:"";
+    position:absolute;
+    width:250px;
+    height:250px;
+    background:#ffffff44;
+    border-radius:50%;
+    bottom:-80px;
+    left:-80px;
+    animation:move 10s infinite alternate;
+
+}
+
+
+@keyframes move{
+
+    from{
+        transform:translateY(0);
+    }
+
+    to{
+        transform:translateY(40px);
+    }
+
+}
+
+
+
+.container{
+
+    width:90%;
+    max-width:420px;
+    z-index:2;
+
+}
+
+
+
+.card{
+
+    background:rgba(255,255,255,0.25);
+    backdrop-filter:blur(20px);
+
+    border-radius:30px;
+
+    padding:35px 25px;
+
+    text-align:center;
+
+    box-shadow:
+    0 15px 40px rgba(0,0,0,.15);
+
+    animation:show .8s ease;
+
+}
+
+
+
+@keyframes show{
+
+    from{
+
+        opacity:0;
+        transform:translateY(30px);
 
     }
 
-    else if(noCount == 2){
+    to{
 
-        title.innerHTML = "هنوز یه سوال کوچیک مونده ✨";
-        text.innerHTML = "فقط یه نگاه کوچیک";
-
-    }
-
-    else{
-
-        startInvite();
+        opacity:1;
+        transform:translateY(0);
 
     }
 
@@ -37,225 +117,161 @@ function later(){
 
 
 
-// شروع دعوت
+h1{
 
-function startInvite(){
-
-    title.innerHTML = "🌸 یه سوال دارم";
-
-    text.innerHTML =
-    "با من میای یه دیت کوچیک؟ 😊";
-
-
-    buttons.innerHTML = `
-
-    <button class="yes" onclick="chooseDate()">
-    آره ✨
-    </button>
-
-
-    <button class="no" onclick="later()">
-    نه
-    </button>
-
-    `;
+    color:#fff;
+    font-size:30px;
+    margin-bottom:15px;
 
 }
 
 
 
-// انتخاب تاریخ
+p{
 
-function chooseDate(){
-
-    title.innerHTML = "📅 چه روزی دوست داری؟";
-
-    text.innerHTML = "";}
-
-}
-
-typeWriter();
-
-
-
-function createHeart(){
-
-const heart=document.createElement("div");
-
-heart.className="heart";
-
-heart.innerHTML="❤️";
-
-heart.style.left=Math.random()*100+"vw";
-
-heart.style.fontSize=(18+Math.random()*25)+"px";
-
-heart.style.animationDuration=(4+Math.random()*4)+"s";
-
-document.body.appendChild(heart);
-
-setTimeout(()=>{
-
-heart.remove();
-
-},8000);
-
-}
-
-setInterval(createHeart,350);
-
-
-
-yes.onclick=()=>{
-
-document.querySelector(".glass").classList.add("hide");
-
-step2.classList.remove("hide");
+    color:white;
+    font-size:18px;
+    margin-bottom:25px;
 
 }
 
 
 
-no.onclick=()=>{
+button{
 
-noCount++;
+    width:100%;
 
-if(noCount==1){
+    border:none;
 
-moveButton();
+    padding:15px;
 
-}
+    margin:10px 0;
 
-else if(noCount==2){
+    border-radius:50px;
 
-moveButton();
+    font-size:18px;
 
-no.style.transform="scale(.7)";
+    cursor:pointer;
 
-}
-
-else{
-
-document.querySelector(".glass").classList.add("hide");
-
-step2.classList.remove("hide");
-
-}
+    transition:.3s;
 
 }
 
 
 
-function moveButton(){
+button:hover{
 
-const x=Math.random()*220-110;
-
-const y=Math.random()*180-90;
-
-no.style.transform=`translate(${x}px,${y}px)`;
+    transform:scale(1.05);
 
 }
 
 
 
-submit.onclick=()=>{
+.yes{
 
-const date=document.getElementById("date").value;
-
-const time=document.getElementById("time").value;
-
-const place=document.getElementById("place").value;
-
-const message=document.getElementById("message").value;
-
-if(date=="" || time==""){
-
-alert("اول تاریخ و ساعت رو انتخاب کن ❤️");
-
-return;
+    background:#ff4f91;
+    color:white;
 
 }
 
 
 
-const data={
+.no{
 
-date,
-
-time,
-
-place,
-
-message,
-
-created:new Date().toLocaleString()
-
-};
-
-
-
-console.log(data);
-
-
-
-step2.classList.add("hide");
-
-finish.classList.remove("hide");
-
-
-
-confetti();
-
-};
-
-
-
-function confetti(){
-
-for(let i=0;i<120;i++){
-
-const c=document.createElement("div");
-
-c.innerHTML=Math.random()>0.5?"💖":"🎉";
-
-c.style.position="absolute";
-
-c.style.left=Math.random()*100+"vw";
-
-c.style.top="-20px";
-
-c.style.fontSize=(18+Math.random()*18)+"px";
-
-c.style.transition="5s linear";
-
-document.body.appendChild(c);
-
-setTimeout(()=>{
-
-c.style.top="110vh";
-
-c.style.transform=`rotate(${Math.random()*900}deg)`;
-
-},10);
-
-setTimeout(()=>{
-
-c.remove();
-
-},5200);
-
-}
+    background:white;
+    color:#ff4f91;
 
 }
 
 
 
-if(navigator.vibrate){
+.dateBox,
+.timeBox{
 
-yes.addEventListener("click",()=>{
-
-navigator.vibrate(100);
-
-});
+    margin-top:20px;
 
 }
+
+
+
+input,
+select{
+
+    width:100%;
+
+    padding:15px;
+
+    border:none;
+
+    border-radius:20px;
+
+    font-size:16px;
+
+    text-align:center;
+
+    outline:none;
+
+}
+
+
+
+.footer{
+
+    position:fixed;
+
+    bottom:15px;
+
+    color:white;
+
+    font-size:13px;
+
+    z-index:3;
+
+    opacity:.9;
+
+}
+
+
+
+.telegram{
+
+    display:block;
+
+    background:#229ED9;
+
+    color:white;
+
+    padding:15px;
+
+    border-radius:50px;
+
+    text-decoration:none;
+
+    margin-top:20px;
+
+}
+
+
+
+.fade{
+
+    animation:fade .5s;
+
+}
+
+
+@keyframes fade{
+
+    from{
+
+        opacity:0;
+
+    }
+
+    to{
+
+        opacity:1;
+
+    }
+
+        }
