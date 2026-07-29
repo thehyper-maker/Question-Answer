@@ -1,117 +1,53 @@
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
+
 <head>
-
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>❤️ یه سوال مهم...</title>
+<title>✨ یه دعوت کوچیک</title>
 
 <link rel="stylesheet" href="style.css">
-
-<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;500;700&display=swap" rel="stylesheet">
 
 </head>
 
 <body>
 
-<div id="hearts"></div>
+<div class="container">
 
-<div class="glass">
+<div class="card">
 
-<h3 id="typing"></h3>
-
-<h1 id="question" class="hide">
-
-با من میای دیت؟ ❤️
-
+<h1 id="title">
+✨ یه انتخاب کوچیک...
 </h1>
 
-<div id="buttons" class="hide">
-
-<button id="yes">
-
-😍 آره
-
-</button>
-
-<button id="no">
-
-🙈 نه
-
-</button>
-
-</div>
-
-</div>
-
-<div id="step2" class="hide">
-
-<h2>
-
-🥹 خوشحالم قبول کردی...
-
-</h2>
-
-<p>
-
-حالا فقط تاریخ قرارمون رو انتخاب کن.
-
+<p id="text">
+یه سوال کوچیک دارم 😊
 </p>
 
-<input type="date" id="date">
 
-<input type="time" id="time">
+<div id="buttons">
 
-<select id="place">
+<button class="yes" onclick="startInvite()">
+🌸 بازش کن
+</button>
 
-<option>☕ کافه</option>
-
-<option>🍕 رستوران</option>
-
-<option>🎬 سینما</option>
-
-<option>🌳 پارک</option>
-
-</select>
-
-<textarea
-
-id="message"
-
-placeholder="یه پیام برام بنویس ❤️"
-
-></textarea>
-
-<button id="submit">
-
-ثبت قرار 💌
-
+<button class="no" onclick="later()">
+🌙 بعداً
 </button>
 
 </div>
 
-<div id="finish" class="hide">
-
-<h1>
-
-❤️
-
-</h1>
-
-<h2>
-
-قرارمون ثبت شد...
-
-</h2>
-
-<p>
-
-منتظر اون روز میمونم 🥹
-
-</p>
 
 </div>
+
+</div>
+
+
+<div class="footer">
+Made with ❤️ by <b>Alireza Monadi</b>
+</div>
+
 
 <script src="script.js"></script>
 
